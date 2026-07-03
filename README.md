@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Masahati — Mobile-First Storage Marketplace PWA
 
-## Getting Started
+Prototype احترافي عربي RTL لفكرة Marketplace تربط بين أصحاب المساحات الفارغة والعملاء الذين يحتاجون تخزينًا أو مواقف شهرية داخل الإمارات.
 
-First, run the development server:
+## المزايا
+
+- Next.js App Router + TypeScript + Tailwind CSS.
+- واجهة عربية RTL بالكامل ومهيأة للجوال أولاً.
+- بيانات وهمية كاملة: 12 مساحة، 5 مستخدمين، 4 مضيفين، 8 حجوزات، 10 تقييمات، 6 محادثات.
+- رحلة الباحث: بحث، فلاتر، تفاصيل، حجز تجريبي، نجاح.
+- رحلة المضيف: إضافة مساحة بخطوات، لوحة أرباح وحجوزات.
+- رسائل وهمية تعمل محليًا داخل الواجهة.
+- Admin تجريبي لإدارة المساحات.
+- PWA Manifest بدون APIs مدفوعة أو مفاتيح سرية.
+
+## الصفحات المهمة
+
+- `/` الصفحة التسويقية والبداية
+- `/search` البحث والنتائج
+- `/listings/l1` تفاصيل مساحة
+- `/booking/l1` الحجز التجريبي
+- `/booking/success` نجاح الحجز
+- `/host` لوحة المضيف
+- `/host/new` إضافة مساحة
+- `/bookings` حجوزاتي
+- `/messages` الرسائل
+- `/profile` الحساب
+- `/admin` لوحة Admin
+
+## التشغيل المحلي
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## فحص الإنتاج
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## النشر على Vercel
 
-## Learn More
+```bash
+vercel deploy --prod --yes
+```
 
-To learn more about Next.js, take a look at the following resources:
+## الحسابات التجريبية
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- الدخول كتجربة
+- الدخول كمضيف
+- الدخول كمستأجر
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+لا يوجد تسجيل دخول حقيقي ولا دفع حقيقي؛ جميع العمليات محاكاة Prototype.

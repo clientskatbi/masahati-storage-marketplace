@@ -1,0 +1,1 @@
+import { BottomNav } from "./BottomNav";export function AppShell({children}:{children:React.ReactNode}){return <main className="min-h-screen bg-slate-50 pb-24"><div className="mx-auto max-w-5xl px-4 py-5">{children}</div><BottomNav/></main>}

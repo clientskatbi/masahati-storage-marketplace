@@ -1,0 +1,3 @@
+import Link from "next/link";import { cn } from "@/lib/utils";
+type Props={href?:string;children:React.ReactNode;variant?:"primary"|"secondary"|"ghost";className?:string;type?:"button"|"submit"};
+export function Button({href,children,variant="primary",className,type="button"}:Props){const cls=cn("inline-flex min-h-12 items-center justify-center rounded-2xl px-5 py-3 text-sm font-bold transition active:scale-[.98]",variant==="primary"&&"bg-blue-700 text-white shadow-lg shadow-blue-700/20",variant==="secondary"&&"bg-emerald-600 text-white shadow-lg shadow-emerald-600/20",variant==="ghost"&&"bg-white text-slate-800 border border-slate-200",className);return href?<Link className={cls} href={href}>{children}</Link>:<button type={type} className={cls}>{children}</button>}

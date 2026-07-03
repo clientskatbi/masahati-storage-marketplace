@@ -1,0 +1,1 @@
+import { AppShell } from "@/components/layout/AppShell";import { MessageThread } from "@/components/messages/MessageThread";export default async function Thread({params}:{params:Promise<{id:string}>}){const {id}=await params;return <AppShell><MessageThread id={id}/></AppShell>}

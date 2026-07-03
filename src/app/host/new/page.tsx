@@ -1,0 +1,1 @@
+import { AppShell } from "@/components/layout/AppShell";import { HostNewForm } from "@/components/host/HostNewForm";export default function NewHost(){return <AppShell><h1 className="mb-4 text-3xl font-black">أضف مساحتك</h1><HostNewForm/></AppShell>}
