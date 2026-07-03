@@ -1,2 +1,26 @@
-import { AppShell } from "@/components/layout/AppShell";import { SearchFilters } from "@/components/listings/SearchFilters";import { listings } from "@/lib/mockData";import { ListingCard } from "@/components/listings/ListingCard";
-export default function SearchPage(){return <AppShell><h1 className="mb-4 text-3xl font-black">البحث عن مساحة</h1><div className="mb-4 flex gap-2 overflow-x-auto pb-1">{['مكيف','داخلي','خارجي','موقف سيارة','كراج','مناسب للأثاث','مناسب للسيارات'].map(f=><span key={f} className="shrink-0 rounded-full bg-white px-4 py-2 text-sm font-bold shadow-sm">{f}</span>)}</div><SearchFilters/><h2 className="mt-8 mb-3 text-2xl font-black">كل المساحات</h2><div className="grid gap-4 md:grid-cols-2">{listings.map(l=><ListingCard key={l.id} listing={l}/>)}</div></AppShell>}
+import { AppShell } from "@/components/layout/AppShell";
+import { SearchFilters } from "@/components/listings/SearchFilters";
+
+export default function SearchPage() {
+  return (
+    <AppShell>
+      <h1 className="mb-4 text-3xl font-black">البحث عن مساحة</h1>
+      <div className="mb-4 flex gap-2 overflow-x-auto pb-1">
+        {[
+          "مكيف",
+          "داخلي",
+          "خارجي",
+          "موقف سيارة",
+          "كراج",
+          "مناسب للأثاث",
+          "مناسب للسيارات",
+        ].map((f) => (
+          <span key={f} className="shrink-0 rounded-full bg-white px-4 py-2 text-sm font-bold shadow-sm">
+            {f}
+          </span>
+        ))}
+      </div>
+      <SearchFilters />
+    </AppShell>
+  );
+}
