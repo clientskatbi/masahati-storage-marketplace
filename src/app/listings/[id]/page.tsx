@@ -1,2 +1,53 @@
-import { AppShell } from "@/components/layout/AppShell";import { getListing, prohibitedItems, reviews } from "@/lib/mockData";import { aed } from "@/lib/utils";import { Badge } from "@/components/ui/Badge";import { Button } from "@/components/ui/Button";import { Star,MapPin,MessageCircle,ShieldCheck } from "lucide-react";import { FavoriteButton } from "@/components/listings/FavoriteButton";
-export default async function ListingDetails({params}:{params:Promise<{id:string}>}){const {id}=await params;const l=getListing(id);return <AppShell><div className="grid gap-3">{l.images.map((g,i)=><div key={i} className={`h-52 rounded-[2rem] bg-gradient-to-br ${g} shadow-inner`}/>)}</div><section className="mt-5 premium-card rounded-[2rem] p-5"><div className="flex items-start justify-between gap-3"><div><h1 className="mobile-title text-3xl font-black">{l.title}</h1><p className="mt-2 flex items-center gap-1 text-slate-500"><MapPin className="h-4 w-4"/> {l.city}، {l.area} — موقع تقريبي</p></div><FavoriteButton id={l.id}/></div><div className="mt-4 flex flex-wrap gap-2"><Badge>{l.badge}</Badge><Badge tone="verified"><ShieldCheck className="ml-1 h-3 w-3"/>هوية المضيف موثقة</Badge></div><p className="mt-4 text-2xl font-black text-primary">{aed(l.price)} / شهر</p><p className="mt-3 text-slate-700">{l.description}</p></section><section className="mt-4 grid grid-cols-2 gap-3">{[['نوع المساحة',l.type],['المساحة',`${l.sqm} م²`],['الأبعاد',l.dimensions],['أوقات الوصول',l.access]].map(([k,v])=><div key={k} className="premium-card rounded-2xl p-4"><small className="text-slate-500">{k}</small><p className="font-black">{v}</p></div>)}</section><section className="mt-4 premium-card rounded-[2rem] p-5"><h2 className="text-xl font-black">المزايا والأمان</h2><div className="mt-3 flex flex-wrap gap-2">{[...l.security,...l.features].map(x=><Badge key={x} className="bg-muted text-slate-700 ring-border">{x}</Badge>)}</div></section><section className="mt-4 premium-card rounded-[2rem] p-5"><h2 className="text-xl font-black">نبذة عن المضيف</h2><p className="mt-2 font-black">{l.hostName}</p><p className="text-slate-600">{l.hostBio}</p></section><section className="mt-4 premium-card rounded-[2rem] p-5"><h2 className="text-xl font-black">تقييمات العملاء</h2>{reviews.slice(0,3).map(r=><div key={r.id} className="mt-3 border-t border-border pt-3"><b>{r.user}</b><p className="text-warning"><Star className="inline h-4 w-4 fill-warning"/> {r.rating}</p><p className="text-slate-600">{r.text}</p></div>)}</section><section className="mt-4 rounded-[2rem] bg-amber-50 p-5 text-amber-900"><h2 className="text-xl font-black">المواد الممنوعة</h2><ul className="mt-2 list-disc pr-5 text-sm">{prohibitedItems.map(p=><li key={p}>{p}</li>)}</ul><p className="mt-3 text-xs">هذه سياسة داخل التطبيق وليست نصيحة قانونية.</p></section><div className="sticky sticky-cta bottom-24 mt-5 grid grid-cols-3 gap-2 rounded-[1.5rem] bg-white/95 p-2 shadow-xl backdrop-blur"><Button href={`/booking/${l.id}`} className="col-span-2">احجز الآن</Button><Button href={`/messages/m1`} variant="ghost"><MessageCircle className="h-5 w-5"/></Button></div></AppShell>}
+import { AppShell } from "@/components/layout/AppShell";
+import { getListing, prohibitedItems, reviews } from "@/lib/mockData";
+import { aed } from "@/lib/utils";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { SafeImage } from "@/components/ui/SafeImage";
+import { Star, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
+import { FavoriteButton } from "@/components/listings/FavoriteButton";
+
+export default async function ListingDetails({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const l = getListing(id);
+  return (
+    <AppShell>
+      <section className="grid gap-3">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] shadow-xl">
+          <SafeImage src={l.images[0]} alt={l.imageAlt || `الصورة الرئيسية لمساحة ${l.title}`} priority sizes="(max-width: 768px) 100vw, 900px" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+          <div className="absolute bottom-4 right-4 left-4 text-white">
+            <Badge className="mb-2 bg-white/20 text-white ring-white/30">{l.badge}</Badge>
+            <h1 className="mobile-title text-3xl font-black">{l.title}</h1>
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {l.images.slice(1, 4).map((src, i) => (
+            <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-sm">
+              <SafeImage src={src} alt={`صورة إضافية ${i + 1} لمساحة ${l.title}`} sizes="33vw" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-5 premium-card rounded-[2rem] p-5">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="mt-2 flex items-center gap-1 text-slate-500"><MapPin className="h-4 w-4" /> {l.city}، {l.area} — موقع تقريبي</p>
+          </div>
+          <FavoriteButton id={l.id} />
+        </div>
+        <div className="mt-4 flex flex-wrap gap-2"><Badge>{l.badge}</Badge><Badge tone="verified"><ShieldCheck className="ml-1 h-3 w-3" />هوية المضيف موثقة</Badge></div>
+        <p className="mt-4 text-2xl font-black text-primary">{aed(l.price)} / شهر</p>
+        <p className="mt-3 text-slate-700">{l.description}</p>
+      </section>
+
+      <section className="mt-4 grid grid-cols-2 gap-3">{[["نوع المساحة", l.type], ["المساحة", `${l.sqm} م²`], ["الأبعاد", l.dimensions], ["أوقات الوصول", l.access]].map(([k, v]) => <div key={k} className="premium-card rounded-2xl p-4"><small className="text-slate-500">{k}</small><p className="font-black">{v}</p></div>)}</section>
+      <section className="mt-4 premium-card rounded-[2rem] p-5"><h2 className="text-xl font-black">المزايا والأمان</h2><div className="mt-3 flex flex-wrap gap-2">{[...l.security, ...l.features].map((x) => <Badge key={x} className="bg-muted text-slate-700 ring-border">{x}</Badge>)}</div></section>
+      <section className="mt-4 premium-card rounded-[2rem] p-5"><h2 className="text-xl font-black">نبذة عن المضيف</h2><p className="mt-2 font-black">{l.hostName}</p><p className="text-slate-600">{l.hostBio}</p></section>
+      <section className="mt-4 premium-card rounded-[2rem] p-5"><h2 className="text-xl font-black">تقييمات العملاء</h2>{reviews.slice(0, 3).map((r) => <div key={r.id} className="mt-3 border-t border-border pt-3"><b>{r.user}</b><p className="text-warning"><Star className="inline h-4 w-4 fill-warning" /> {r.rating}</p><p className="text-slate-600">{r.text}</p></div>)}</section>
+      <section className="mt-4 rounded-[2rem] bg-amber-50 p-5 text-amber-900"><h2 className="text-xl font-black">المواد الممنوعة</h2><ul className="mt-2 list-disc pr-5 text-sm">{prohibitedItems.map((p) => <li key={p}>{p}</li>)}</ul><p className="mt-3 text-xs">هذه سياسة داخل التطبيق وليست نصيحة قانونية.</p></section>
+      <div className="sticky sticky-cta bottom-24 mt-5 grid grid-cols-3 gap-2 rounded-[1.5rem] bg-white/95 p-2 shadow-xl backdrop-blur"><Button href={`/booking/${l.id}`} className="col-span-2">احجز الآن</Button><Button href="/messages/m1" variant="ghost"><MessageCircle className="h-5 w-5" /></Button></div>
+    </AppShell>
+  );
+}
