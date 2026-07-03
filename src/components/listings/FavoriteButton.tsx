@@ -1,19 +1,2 @@
-"use client";
-import { Heart } from "lucide-react";
-import { useState } from "react";
-
-export function FavoriteButton() {
-  const [saved, setSaved] = useState(false);
-  return (
-    <button
-      aria-label="حفظ في المفضلة"
-      onClick={() => {
-        setSaved((v) => !v);
-        window.dispatchEvent(new CustomEvent("toast", { detail: saved ? "تمت إزالة المفضلة" : "تم حفظ المساحة في المفضلة" }));
-      }}
-      className="rounded-full bg-red-50 p-3 text-red-500"
-    >
-      <Heart className={saved ? "fill-red-500" : ""} />
-    </button>
-  );
-}
+"use client";import { Heart } from "lucide-react";import { useAppStore } from "@/components/layout/AppStore";
+export function FavoriteButton({id}:{id:string}){const {favorites,toggleFavorite,requireRole}=useAppStore();const saved=favorites.includes(id);return <button aria-label="حفظ في المفضلة" onClick={()=>requireRole(['renter','host','admin'],'حفظ المفضلة')&&toggleFavorite(id)} className={`rounded-full p-3 transition ${saved?'bg-red-50 text-destructive':'bg-white/90 text-slate-500'}`}><Heart className={saved?'fill-current':''}/></button>}

@@ -1,2 +1,16 @@
 @import "tailwindcss";
-:root{--background:#f8fafc;--foreground:#0f172a}*{box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--background);color:var(--foreground);font-family:var(--font-tajawal),system-ui,sans-serif}button,input,select,textarea{font:inherit}.safe-bottom{padding-bottom:env(safe-area-inset-bottom)}
+:root{
+  --primary:#17324D; --primary-foreground:#FFFFFF; --secondary:#128A63; --accent:#EAF3FF;
+  --muted:#F3F6FA; --success:#159A64; --warning:#F59E0B; --destructive:#C94A4A;
+  --card:#FFFFFF; --border:#DDE6F0; --background:#F7FAFD; --foreground:#102033;
+}
+@theme inline{
+  --color-primary:var(--primary); --color-primary-foreground:var(--primary-foreground); --color-secondary:var(--secondary);
+  --color-accent:var(--accent); --color-muted:var(--muted); --color-success:var(--success); --color-warning:var(--warning);
+  --color-destructive:var(--destructive); --color-card:var(--card); --color-border:var(--border); --color-background:var(--background); --color-foreground:var(--foreground);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{background:var(--background);color:var(--foreground);font-family:var(--font-tajawal),system-ui,sans-serif}button,input,select,textarea{font:inherit}button{touch-action:manipulation}.safe-bottom{padding-bottom:env(safe-area-inset-bottom)}
+.premium-card{border:1px solid var(--border);background:rgba(255,255,255,.94);box-shadow:0 10px 35px rgba(23,50,77,.08)}
+.field{min-height:52px;width:100%;border-radius:1rem;border:1px solid var(--border);background:white;padding:.85rem 1rem;outline:none}.field:focus{box-shadow:0 0 0 3px rgba(23,50,77,.14);border-color:var(--primary)}
+.status-active{background:#E9F9F1;color:#0D6B45}.status-pending{background:#FFF5DF;color:#9A5A00}.status-old{background:#EEF3F8;color:#526173}.status-booked{background:#EAF3FF;color:#17324D}.status-rejected{background:#FDECEC;color:#A13B3B}
+@media (max-width:430px){.mobile-title{font-size:1.75rem;line-height:1.2}.mobile-pad{padding:1rem}.sticky-cta{bottom:5.75rem}}
